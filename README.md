@@ -22,6 +22,7 @@ This project automates the process of uploading CSV data from an S3 bucket to a 
 Go to the S3 Console.
 Click "Create bucket" → Name it (e.g., csv-upload-bucket).
 Keep everything else default and click "Create bucket".
+
 🛠 Step 2: Create the DynamoDB table
 
 Go to the DynamoDB Console.
@@ -29,6 +30,8 @@ Click "Create table".
 Table name: CSVDataTable.
 Partition key: id → Type: String (We’ll generate unique IDs for each row).
 Click "Create table".
+
+
 🛠 Step 3: Create an IAM role for the Lambda function
 
 Go to the IAM Console.
@@ -47,6 +50,8 @@ Function name: S3ToDynamoDBFunction.
 Runtime: Python 3.12 (or latest).
 Execution role: Use existing role → Select LambdaS3DynamoDBRole.
 Click "Create function".
+
+
 📝 Step 5: Write the Lambda function 
 which is lambdaFunc.py
 
@@ -57,23 +62,17 @@ Click "Add trigger" → Select S3.
 Bucket: csv-upload-bucket.
 Event type: "PUT" (when a file is uploaded).
 Click "Add".
-🛠 Step 7: Upload a CSV file to S3
 
-Open your csv-upload-bucket in the S3 console.
-Click "Upload" → Select a CSV file like this:
-csv
-Copy
-Edit
-name,email
-Alice,alice@example.com
-Bob,bob@example.com
-Charlie,charlie@example.com
-Click "Upload".
+🛠 Step 7: Upload a CSV file to S3
+sample.csv
+
 🛠 Step 8: Check DynamoDB
 
 Go back to the CSVDataTable in the DynamoDB Console.
 Click "Explore table items".
 You should see each row from the CSV file inserted as an item.
+
+
 🛠 Step 9: (Optional) Clean up resources
 
 Delete the S3 bucket.
